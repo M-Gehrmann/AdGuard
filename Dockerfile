@@ -6,20 +6,6 @@ ARG BUILD_DATE
 ARG VERSION
 ARG VCS_REF
 
-LABEL\
-	maintainer="AdGuard Team <devteam@adguard.com>" \
-	org.opencontainers.image.authors="AdGuard Team <devteam@adguard.com>" \
-	org.opencontainers.image.created=$BUILD_DATE \
-	org.opencontainers.image.description="Network-wide ads & trackers blocking DNS server" \
-	org.opencontainers.image.documentation="https://github.com/AdguardTeam/AdGuardHome/wiki/" \
-	org.opencontainers.image.licenses="GPL-3.0" \
-	org.opencontainers.image.revision=$VCS_REF \
-	org.opencontainers.image.source="https://github.com/AdguardTeam/AdGuardHome" \
-	org.opencontainers.image.title="AdGuard Home" \
-	org.opencontainers.image.url="https://adguard.com/en/adguard-home/overview.html" \
-	org.opencontainers.image.vendor="AdGuard" \
-	org.opencontainers.image.version=$VERSION
-
 # Update certificates.
 RUN apk --no-cache add ca-certificates libcap tzdata && \
 	mkdir -p /opt/adguardhome/conf /opt/adguardhome/work && \
@@ -51,9 +37,3 @@ EXPOSE 53/tcp 53/udp 67/udp 68/udp 80/tcp 443/tcp 443/udp 853/tcp\
 WORKDIR /opt/adguardhome/work
 
 ENTRYPOINT ["/opt/adguardhome/AdGuardHome"]
-
-CMD [ \
-	"--no-check-update", \
-	"-c", "/opt/adguardhome/conf/AdGuardHome.yaml", \
-	"-w", "/opt/adguardhome/work" \
-]
