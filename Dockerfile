@@ -16,10 +16,6 @@ ARG TARGETARCH
 ARG TARGETOS
 ARG TARGETVARIANT
 
-COPY --chown=nobody:nogroup\
-	./${DIST_DIR}/docker/AdGuardHome_${TARGETOS}_${TARGETARCH}_${TARGETVARIANT}\
-	/opt/adguardhome/AdGuardHome
-
 RUN setcap 'cap_net_bind_service=+eip' /opt/adguardhome/AdGuardHome
 
 # 53     : TCP, UDP : DNS
